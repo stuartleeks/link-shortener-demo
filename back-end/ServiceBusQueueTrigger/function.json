@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "name": "redirectMessage",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "redirects"
+    },
+    {
+      "type": "signalR",
+      "direction": "out",
+      "name": "signalRMessages",
+      "hubName": "serverless",
+      "connection": "AzureSignalRConnectionString"
+    }
+  ],
+  "scriptFile": "../dist/ServiceBusQueueTrigger/index.js"
+}

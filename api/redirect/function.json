@@ -1,0 +1,26 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "serviceBus",
+      "direction": "out",
+      "queueName": "redirects",
+      "name": "redirectQueue"
+    }
+  ],
+  "scriptFile": "../dist/redirect/index.js"
+}

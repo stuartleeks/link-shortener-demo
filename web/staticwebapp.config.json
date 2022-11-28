@@ -1,0 +1,72 @@
+{
+	"platform": {
+		"apiRuntime": "node:16"
+	},
+	"routes": [
+		{
+			"route": "/favicon.ico",
+			"statusCode": 404
+		},
+		{
+			"route": "/_login",
+			"rewrite": "/.auth/login/aad"
+		},
+		{
+			"route": "/_logout",
+			"rewrite": "/.auth/logout"
+		},
+		{
+			"route": "/.auth/*",
+			"methods": [
+				"GET",
+				"POST"
+			]
+		},
+		{
+			"route": "/_admin/*",
+			"methods": [
+				"GET"
+			],
+			"allowedRoles": [
+				"admin"
+			]
+		},
+		{
+			"route": "/_admin*",
+			"methods": [
+				"GET"
+			],
+			"allowedRoles": [
+				"admin"
+			]
+		},
+		{
+			"route": "/api/negotiate/*",
+			"allowedRoles": [
+				"admin"
+			]
+		},
+		{
+			"route": "/api/negotiate*",
+			"allowedRoles": [
+				"admin"
+			]
+		},
+		{
+			"route": "/demo",
+			"methods": [
+				"GET"
+			]
+		},
+		{
+			"route": "/*",
+			"rewrite": "/api/redirect"
+		}
+	],
+	"responseOverrides": {
+		"401": {
+			"redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
+			"statusCode": 302
+		}
+	}
+}

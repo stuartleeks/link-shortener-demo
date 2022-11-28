@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SignalR Real-time Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            // Real-time Chart Example written by Simon Brunel (Plunker: https://plnkr.co/edit/Imxwl9OQJuaMepLNy6ly?p=info)
+            var samples = 100;
+            var speed = 250;
+            var values = [];
+            var labels = [];
+            var charts = [];
+            var value = 0;
+
+            values.length = samples;
+            labels.length = samples;
+            values.fill(0);
+            labels.fill("");
+
+            var chart = new Chart(document.getElementById("chart"),
+                {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                data: values,
+                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                borderWidth: 2,
+                                lineTension: 0.25,
+                                pointRadius: 0
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: false,
+                        animation: {
+                            duration: speed * 1.5,
+                            easing: 'linear'
+                        },
+                        legend: false,
+                        scales: {
+                            yAxis: {
+                                min:0,
+                                suggestedMax: 2
+                            }
+                        }
+                    }
+                });
+
+            const apiBaseUrl = window.location.origin;
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl(apiBaseUrl + '/api')
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            let counter = 0;
+            setInterval(function () {
+                values.shift();
+                counter = 0;
+                values.push(0);
+                chart.update();
+            }, 5000);
+            connection.on('redirect', (message) => {
+                counter++;
+                values[values.length - 1] = counter;
+                chart.update();
+            });
+
+            connection.start();
+        });
+    </script>
+
+</head>
+
+<body>
+    <canvas id="chart" style="width: 1024px; height: 768px"></canvas>
+</body>
+
+</html>

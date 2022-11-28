@@ -89,7 +89,7 @@ backend_function_dir=$(realpath $script_dir/../back-end)
 history -s "curl http://localhost:4280/test | jq"
 history -s "yarn add applicationinsights"
 history -s "curl -i $web_base_url/microsoft"
-history -s "\$BROWSER $web_base_url/_admin"
+history -s "\$BROWSER $web_base_url/admin"
 history -s "swa start"
 history -s "swa deploy --env production"
 history -s "(cd $backend_function_dir && yarn run build && func azure functionapp publish $backend_function_name)"

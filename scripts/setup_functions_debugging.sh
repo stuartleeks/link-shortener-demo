@@ -73,4 +73,5 @@ cat <<EOF > $script_dir/../.vscode/launch.json
       "preLaunchTask": "func: host start (back-end)",
     }
   ]
-}EOF
+}
+EOF

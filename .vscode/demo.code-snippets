@@ -1,0 +1,126 @@
+{
+	// Place your link-shortener-demo workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"routes": {
+		"prefix": "snip-routes",
+		"body": [
+			"{",
+			"\t\"platform\": {",
+			"\t\t\"apiRuntime\": \"node:16\"",
+			"\t},",
+			"\t\"routes\": [",
+			"\t\t{",
+			"\t\t\t\"route\": \"/favicon.ico\",",
+			"\t\t\t\"statusCode\": 404",
+			"\t\t},",
+			"\t\t{",
+			"\t\t\t\"route\": \"/_login\",",
+			"\t\t\t\"rewrite\": \"/.auth/login/aad\"",
+			"\t\t},",
+			"\t\t{",
+			"\t\t\t\"route\": \"/_logout\",",
+			"\t\t\t\"rewrite\": \"/.auth/logout\"",
+			"\t\t},",
+			"\t\t{",
+			"\t\t\t\"route\": \"/.auth/*\",",
+			"\t\t\t\"methods\": [",
+			"\t\t\t\t\"GET\",",
+			"\t\t\t\t\"POST\"",
+			"\t\t\t]",
+			"\t\t},",
+			"\t\t{",
+			"\t\t\t\"route\": \"/_admin/*\",",
+			"\t\t\t\"methods\": [",
+			"\t\t\t\t\"GET\"",
+			"\t\t\t],",
+			"\t\t\t\"allowedRoles\": [",
+			"\t\t\t\t\"admin\"",
+			"\t\t\t]",
+			"\t\t},",
+			"\t\t{",
+			"\t\t\t\"route\": \"/_admin*\",",
+			"\t\t\t\"methods\": [",
+			"\t\t\t\t\"GET\"",
+			"\t\t\t],",
+			"\t\t\t\"allowedRoles\": [",
+			"\t\t\t\t\"admin\"",
+			"\t\t\t]",
+			"\t\t}",
+			"\t],",
+			"\t\"responseOverrides\": {",
+			"\t\t\"401\": {",
+			"\t\t\t\"redirect\": \"/.auth/login/aad?post_login_redirect_uri=.referrer\",",
+			"\t\t\t\"statusCode\": 302",
+			"\t\t}",
+			"\t}",
+			"}"
+		],
+	},
+	"routes-redirect": {
+		"prefix": "snip-routes-redirect",
+		"body": [
+			"\t\t,{",
+			"\t\t\t\"route\": \"/*\",",
+			"\t\t\t\"rewrite\": \"/api/redirect\"",
+			"\t\t}",
+		]
+	},
+	"redirects": {
+		"prefix": "snip-redirects",
+		"body": [
+			"const redirects = {",
+			"    \"/swa\": \"https://learn.microsoft.com/en-us/azure/static-web-apps/overview\",",
+			"    \"/functions\": \"https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview\",",
+			"    \"/service-bus\": \"https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview\",",
+			"    \"/signalr\": \"https://learn.microsoft.com/en-us/azure/azure-signalr/signalr-overview\",",
+			"    \"/microsoft\": \"https://microsoft.com\",",
+			"    \"/stuartleeks\": \"https://stuartleeks.com\",",
+			"    \"/jamiedalton\": \"https://jamied.me/about/\",",
+			"    \"/wsl\": \"https://wsl.tips\",",
+			"}",
+		]
+	},
+	"get-url": {
+		"prefix": "snip-get-url",
+		"body": [
+			"const originalUrl = req.headers[\"x-ms-original-url\"] as string;",
+			"const originalPath = new URL(originalUrl).pathname;",
+			"const redirectUrl = redirects[originalPath] ?? \"https://stuartleeks.com\";"
+		]
+	},
+	"app-insights": {
+		"prefix": "snip-app-insights",
+		"body": [
+			"import * as appInsights from \"applicationinsights\";",
+			"",
+			"appInsights.setup();",
+			"const client = appInsights.defaultClient;",
+			""
+		]
+	},
+	"servicebus-binding-out": {
+		"prefix": "snip-servicebus-binding-out",
+		"body": [
+			"    ,{",
+			"      \"type\": \"serviceBus\",",
+			"      \"direction\": \"out\",",
+			"      \"queueName\": \"redirects\",",
+			"      \"name\": \"redirectQueue\"",
+			"    }"
+		]
+	}
+}

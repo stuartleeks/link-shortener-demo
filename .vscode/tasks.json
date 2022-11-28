@@ -1,0 +1,52 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"type": "func",
+		"label": "func: host start (api)",
+		"command": "host start",
+		"problemMatcher": "$func-node-watch",
+		"isBackground": true,
+		"dependsOn": "yarn install (functions api)",
+		"options": {
+		  "cwd": "${workspaceFolder}/api"
+		}
+	  },
+	  {
+		"type": "func",
+		"label": "func: host start (back-end)",
+		"command": "host start --port 7072",
+		"problemMatcher": "$func-node-watch",
+		"isBackground": true,
+		"dependsOn": "yarn install (functions back-end)",
+		"options": {
+		  "cwd": "${workspaceFolder}/back-end"
+		}
+	  },
+	  {
+		"type": "shell",
+		"label": "yarn install (functions api)",
+		"command": "yarn",
+		"options": {
+		  "cwd": "${workspaceFolder}/api"
+		}
+	  },
+	  {
+		"type": "shell",
+		"label": "yarn install (functions back-end)",
+		"command": "yarn",
+		"options": {
+		  "cwd": "${workspaceFolder}/back-end"
+		}
+	  },
+	  {
+		"type": "shell",
+		"label": "npm prune (functions)",
+		"command": "npm prune --production",
+		"problemMatcher": [],
+		"options": {
+		  "cwd": "${workspaceFolder}/api"
+		}
+	  }
+	]
+  }

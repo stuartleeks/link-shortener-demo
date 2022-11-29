@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "name": "redirectMessage",
+      "queueName": "redirects"
+    }
+  ],
+  "scriptFile": "../dist/ServiceBusQueueTrigger/index.js"
+}

@@ -15,22 +15,22 @@ cat <<EOF > $script_dir/../.vscode/tasks.json
       "type": "func",
       "label": "func: host start (api)",
       "command": "host start",
-      "problemMatcher": "$func-node-watch",
+      "problemMatcher": "\$func-node-watch",
       "isBackground": true,
       "dependsOn": "npm install (functions)",
       "options": {
-        "cwd": "${workspaceFolder}/api"
+        "cwd": "\${workspaceFolder}/api"
       }
     },
     {
       "type": "func",
       "label": "func: host start (back-end)",
       "command": "host start",
-      "problemMatcher": "$func-node-watch",
+      "problemMatcher": "\$func-node-watch",
       "isBackground": true,
       "dependsOn": "npm install (functions)",
       "options": {
-        "cwd": "${workspaceFolder}/back-end"
+        "cwd": "\${workspaceFolder}/back-end"
       }
     },
     {
@@ -38,7 +38,7 @@ cat <<EOF > $script_dir/../.vscode/tasks.json
       "label": "npm install (functions)",
       "command": "npm install",
       "options": {
-        "cwd": "${workspaceFolder}/api"
+        "cwd": "\${workspaceFolder}/api"
       }
     },
     {
@@ -47,7 +47,7 @@ cat <<EOF > $script_dir/../.vscode/tasks.json
       "command": "npm prune --production",
       "problemMatcher": [],
       "options": {
-        "cwd": "${workspaceFolder}/api"
+        "cwd": "\${workspaceFolder}/api"
       }
     }
   ]

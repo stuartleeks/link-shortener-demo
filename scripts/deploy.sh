@@ -95,6 +95,7 @@ history -s "\$BROWSER http://localhost:4280/_admin"
 history -s "swa start"
 history -s "swa deploy --env production"
 history -s "(cd $backend_function_dir && yarn run build && func azure functionapp publish $backend_function_name)"
+history -s "./scripts/deploy.sh  && history -r && source /workspaces/link-shortener-demo/infra/setup-env.sh && notify-send deployed #deploy"
 infra_dir=$(realpath $script_dir/../infra)
 history -s "source $infra_dir/setup-env.sh"
 

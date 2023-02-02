@@ -4,7 +4,8 @@
       "type": "serviceBusTrigger",
       "direction": "in",
       "name": "redirectMessage",
-      "queueName": "redirects"
+      "queueName": "redirects",
+      "cardinality": "many"
     }
   ],
   "scriptFile": "../dist/ServiceBusQueueTrigger/index.js"

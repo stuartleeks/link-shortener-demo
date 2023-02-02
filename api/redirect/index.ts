@@ -14,10 +14,10 @@ const redirects = {
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
 
-    const originalUrl = req.headers['x-ms-original-url'];
+    const originalUrl = req.headers['x-ms-original-url'] ?? "https://stuartleeks.com";
     const originalPath = new URL(originalUrl).pathname;
     const redirectUrl = redirects[originalPath];
-
+    
     // send message to Service Bus
     context.bindings.redirectQueue = {
         path: originalPath,

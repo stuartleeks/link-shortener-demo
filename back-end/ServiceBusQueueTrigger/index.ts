@@ -6,20 +6,20 @@ const client = appInsights.defaultClient;
 
 
 const serviceBusQueueTrigger: AzureFunction = async function(context: Context,
-    redirectMessage: {path: string, redirectUrl : string}): Promise<void> {
-    context.log('ServiceBus queue trigger function processed message', redirectMessage);
+    redirectMessage: any): Promise<void> {
+    context.log('ServiceBus queue trigger function processed message', JSON.stringify(redirectMessage));
 
     // Log stats to Cosmos DB ... TODO
 
 
-    client.trackMetric({
-        name: "redirect",
-        value: 1,
-        properties: {   
-            path: redirectMessage.path,
-            redirectUrl: redirectMessage.redirectUrl
-        }
-    });
+    // client.trackMetric({
+    //     name: "redirect",
+    //     value: 1,
+    //     properties: {   
+    //         path: redirectMessage.path,
+    //         redirectUrl: redirectMessage.redirectUrl
+    //     }
+    // });
 
 
 };
